@@ -35,7 +35,6 @@ int main(){
             cv::drawContours(contourImage, contours, i, color);
         }
         // Display frame
-        cv::imshow("Webcam", frame_can);
         cv::imshow("Webcam", contourImage);
     
         // Wait 10 mms and check if ESC was pressed
