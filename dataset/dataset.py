@@ -115,6 +115,15 @@ refCornerHL=np.array([[cornerXmin,cornerYmin],[cornerXmax,cornerYmin],[cornerXma
 refCornerLR=np.array([[cardW-cornerXmax,cardH-cornerYmax],[cardW-cornerXmin,cardH-cornerYmax],[cardW-cornerXmin,cardH-cornerYmin],[cardW-cornerXmax,cardH-cornerYmin]],dtype=np.float32)
 refCorners=np.array([refCornerHL,refCornerLR])
 
+dtd_dir="dtd/images/"
+bg_images=[]
+for subdir in glob(dtd_dir+"/*"):
+    for f in glob(subdir+"/*.jpg"):
+        bg_images.append(mpimg.imread(f))
+print("Nb of images loaded :",len(bg_images))
+print("Saved in :",backgrounds_pck_fn)
+pickle.dump(bg_images,open(backgrounds_pck_fn,'wb'))
+
 class Backgrounds():
     def __init__(self,backgrounds_pck_fn=backgrounds_pck_fn):
         self._images=pickle.load(open(backgrounds_pck_fn,'rb'))
