@@ -9,6 +9,6 @@ dataset/data/cards.pck
 dataset/data/val.txt
 dataset/data/scenes/train
 dataset/data/scenes/val
-dataset/data/cards/*
+dataset/data/cards/*/
 *.avi
 
