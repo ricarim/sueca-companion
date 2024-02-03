@@ -3,7 +3,9 @@ CMakeCache.txt
 CMakeFiles
 cmake_install.cmake
 Makefile
-dataset/darknet 
+dataset/yolov4/darknet
+dataset/yolov4/obj
+dataset/yolov4/training
 dataset/data/backgrounds.pck
 dataset/data/cards.pck
 dataset/data/val.txt
