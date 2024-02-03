@@ -3,4 +3,10 @@ CMakeCache.txt
 CMakeFiles
 cmake_install.cmake
 Makefile
-dataset
+dataset/darknet 
+dataset/data/backgrounds.pck
+dataset/data/cards.pck
+dataset/data/val.txt
+dataset/data/video 
+dataset/data/scenes
+dataset/data/cards
