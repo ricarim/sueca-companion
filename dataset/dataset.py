@@ -734,17 +734,14 @@ class Scene:
 
 
 nb_cards_to_generate=100
-val_dir="data/scenes/val"
-train_dir="data/scenes/train"
+scene_dir="data/scenes"
 
 train_ratio = 0.8
 val_ratio = 1 - train_ratio
 
-if not os.path.isdir(val_dir):
-    os.makedirs(val_dir)
+if not os.path.isdir(scene_dir):
+    os.makedirs(scene_dir)
 
-if not os.path.isdir(train_dir):
-    os.makedirs(train_dir)
 
 for i in tqdm(range(nb_cards_to_generate)):
     bg=backgrounds.get_random()
@@ -752,10 +749,7 @@ for i in tqdm(range(nb_cards_to_generate)):
     img2,card_val2,hulla2,hullb2=cards.get_random()
     
     newimg=Scene(bg,img1,card_val1,hulla1,hullb1,img2,card_val2,hulla2,hullb2)
-    if random.uniform(0, 1) < train_ratio:
-        newimg.write_files(train_dir)
-    else:
-        newimg.write_files(val_dir)
+    newimg.write_files(scene_dir)
 
 
 for i in tqdm(range(nb_cards_to_generate)):
@@ -765,7 +759,4 @@ for i in tqdm(range(nb_cards_to_generate)):
     img3,card_val3,hulla3,hullb3=cards.get_random()
     
     newimg=Scene(bg,img1,card_val1,hulla1,hullb1,img2,card_val2,hulla2,hullb2,img3,card_val3,hulla3,hullb3)
-    if random.uniform(0, 1) < train_ratio:
-        newimg.write_files(train_dir)
-    else:
-        newimg.write_files(val_dir)
+    newimg.write_files(scene_dir)
