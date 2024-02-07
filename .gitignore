@@ -9,8 +9,7 @@ dataset/yolov4/training
 dataset/data/backgrounds.pck
 dataset/data/cards.pck
 dataset/data/val.txt
-dataset/data/scenes/train
-dataset/data/scenes/val
+dataset/data/scenes
 dataset/data/cards/*/
 *.avi
 
