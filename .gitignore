@@ -11,6 +11,6 @@ dataset/data/scenes
 dataset/data/train.txt
 dataset/data/val.txt
 dataset/data/cards/*/
-dataset/yolov8/best.pt
+yolov8/best.pt
 *.avi
 
