@@ -115,6 +115,7 @@ refCornerHL=np.array([[cornerXmin,cornerYmin],[cornerXmax,cornerYmin],[cornerXma
 refCornerLR=np.array([[cardW-cornerXmax,cardH-cornerYmax],[cardW-cornerXmin,cardH-cornerYmax],[cardW-cornerXmin,cardH-cornerYmin],[cardW-cornerXmax,cardH-cornerYmin]],dtype=np.float32)
 refCorners=np.array([refCornerHL,refCornerLR])
 
+"""
 dtd_dir="dtd/images/"
 bg_images=[]
 for subdir in glob(dtd_dir+"/*"):
@@ -123,6 +124,7 @@ for subdir in glob(dtd_dir+"/*"):
 print("Nb of images loaded :",len(bg_images))
 print("Saved in :",backgrounds_pck_fn)
 pickle.dump(bg_images,open(backgrounds_pck_fn,'wb'))
+"""
 
 class Backgrounds():
     def __init__(self,backgrounds_pck_fn=backgrounds_pck_fn):
@@ -733,15 +735,24 @@ class Scene:
         create_voc_xml(xml_fn,jpg_fn, self.listbba,display=display)
 
 
-nb_cards_to_generate=100
-scene_dir="data/scenes"
+nb_cards_to_generate=500
+val_dir="data/scenes/val"
+train_dir="data/scenes/train"
+test_dir="data/scenes/test"
 
 train_ratio = 0.8
-val_ratio = 1 - train_ratio
+val_ratio = 0.1
+test_ratio = 0.1
+temp = 0
 
-if not os.path.isdir(scene_dir):
-    os.makedirs(scene_dir)
+if not os.path.isdir(val_dir):
+    os.makedirs(val_dir)
 
+if not os.path.isdir(train_dir):
+    os.makedirs(train_dir)
+
+if not os.path.isdir(test_dir):
+    os.makedirs(test_dir)
 
 for i in tqdm(range(nb_cards_to_generate)):
     bg=backgrounds.get_random()
@@ -749,7 +760,16 @@ for i in tqdm(range(nb_cards_to_generate)):
     img2,card_val2,hulla2,hullb2=cards.get_random()
     
     newimg=Scene(bg,img1,card_val1,hulla1,hullb1,img2,card_val2,hulla2,hullb2)
-    newimg.write_files(scene_dir)
+    if random.uniform(0, 1) < train_ratio:
+        newimg.write_files(train_dir)
+    else:
+        if temp == 0:
+            newimg.write_files(val_dir)
+            temp = 1
+        else:
+            newimg.write_files(test_dir)
+            temp = 0
+
 
 
 for i in tqdm(range(nb_cards_to_generate)):
@@ -759,4 +779,13 @@ for i in tqdm(range(nb_cards_to_generate)):
     img3,card_val3,hulla3,hullb3=cards.get_random()
     
     newimg=Scene(bg,img1,card_val1,hulla1,hullb1,img2,card_val2,hulla2,hullb2,img3,card_val3,hulla3,hullb3)
-    newimg.write_files(scene_dir)
+    if random.uniform(0, 1) < train_ratio:
+        newimg.write_files(train_dir)
+    else:
+        if temp == 0:
+            newimg.write_files(val_dir)
+            temp = 1
+        else:
+            newimg.write_files(test_dir)
+            temp = 0
+

@@ -1,1 +1,1 @@
-When executing the program all the extracted cards from a video will be put here.
+Where will be a folder for every card with the images of the card's inside 
