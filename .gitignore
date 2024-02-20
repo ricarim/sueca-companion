@@ -12,6 +12,9 @@ dataset/data/train.txt
 dataset/data/val.txt
 dataset/data/cards/*/
 yolov8/best.pt
+yolov8/best.onnx
+yolov8/calibration_image_sample_data_20x128x128x3_float32.npy
+yolov8/best_saved_model
 *.avi
 
 # Gradle files
