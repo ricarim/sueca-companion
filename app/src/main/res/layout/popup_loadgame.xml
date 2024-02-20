@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#668086">
+
+    <TextView
+        android:layout_width="344dp"
+        android:layout_height="361dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="30dp"
+        android:gravity="center"
+        android:text="Load Game"
+        android:textAlignment="center"
+        android:textSize="22sp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
