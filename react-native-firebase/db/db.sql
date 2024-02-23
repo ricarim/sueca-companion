@@ -1,0 +1,10 @@
+create database IF NOT EXISTS game;
+ use game;
+
+ DROP TABLE IF EXISTS SAVED;
+CREATE TABLE IF NOT EXISTS SAVED (
+    NAME varchar(255) PRIMARY KEY,
+    TYPE INTEGER,
+    SCORE INTEGER,
+    DATE DATE
+);

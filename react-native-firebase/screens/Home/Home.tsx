@@ -4,6 +4,8 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
 import Modals from '../../components/Modal/Modal';
 import Input from '../../components/Input/Input';
+import {getDBConnection, getSavedGames, saveGame, createTable, deleteTable, deleteGame} from '../../db/db-services';
+import { GameProps } from '../../Game';
 
 export default function MenuScreen() {
     const [ModalVisibleNew, setModalVisibleNew] = useState(false);
@@ -17,7 +19,23 @@ export default function MenuScreen() {
         setModalVisibleLoad(!ModalVisibleLoad);
     }
 
-    const startGame = () => {}
+    const startGame = () => {
+        addGame();
+    }
+
+    const addGame = async () => {
+        const name = "Sueca";
+        const type = 0;
+        const score = 0;
+        const date = new Date().toISOString();
+        const game: GameProps = { name, type, score, date };
+
+        const db = await getDBConnection();
+        await createTable(db);
+        await saveGame(db, game);
+        const games = await getSavedGames(db);
+        console.log(games);
+    }
     
     const _renderForm = () => {
         return (
