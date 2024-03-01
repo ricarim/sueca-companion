@@ -1,12 +1,17 @@
 import { SafeAreaView } from "react-native";
-import Home from "./screens/Home/Home";
-import {styles} from "./styles";
-import Game from "./Game";
+import { styles } from "./styles";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { RootNavigator } from "./navigation";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  return (
-    <SafeAreaView style={styles.container}>
-        <Home />
-    </SafeAreaView>
-  );
+    return (
+        <NavigationContainer>
+            <SafeAreaView style={styles.container}>
+                <RootNavigator/>
+            </SafeAreaView>
+        </NavigationContainer>
+    );
 }

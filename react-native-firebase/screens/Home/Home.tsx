@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity} from 'react-native';
 import { styles } from './styles';
 import Modals from '../../components/Modal/Modal';
 import Input from '../../components/Input/Input';
 import {getDBConnection, getSavedGames, saveGame, createTable, deleteTable, deleteGame} from '../../db/db-services';
-import { GameProps } from '../../Game';
+import {useAppNavigation} from '../../utils/useAppNavigation';
 
 export default function MenuScreen() {
+    const navigation = useAppNavigation();
     const [ModalVisibleNew, setModalVisibleNew] = useState(false);
     const [ModalVisibleLoad, setModalVisibleLoad] = useState(false);
 
@@ -16,26 +17,8 @@ export default function MenuScreen() {
     }
 
     const toggleModalLoad = () => {
-        setModalVisibleLoad(!ModalVisibleLoad);
-    }
+        setModalVisibleLoad(!ModalVisibleLoad); }
 
-    const startGame = () => {
-        addGame();
-    }
-
-    const addGame = async () => {
-        const name = "Sueca";
-        const type = 0;
-        const score = 0;
-        const date = new Date().toISOString();
-        const game: GameProps = { name, type, score, date };
-
-        const db = await getDBConnection();
-        await createTable(db);
-        await saveGame(db, game);
-        const games = await getSavedGames(db);
-        console.log(games);
-    }
     
     const _renderForm = () => {
         return (
@@ -77,7 +60,10 @@ export default function MenuScreen() {
             visible={ModalVisibleNew}
             modalText="New Game"
             buttonTitle="Start Game"
-            onAction={startGame}
+            onAction={() => { 
+                navigation.navigate('Onboarding', {screen: 'Game'})
+                setModalVisibleNew(false);
+            }}
             onClose={toggleModalNew}
         >
             {_renderForm()}
@@ -87,7 +73,10 @@ export default function MenuScreen() {
             visible={ModalVisibleLoad}
             modalText="Load Game"
             buttonTitle="Load Game"
-            onAction={startGame}
+            onAction={() => { 
+                navigation.navigate('Onboarding', {screen: 'Game'})
+                setModalVisibleLoad(false);
+            }}
             onClose={toggleModalLoad}
         >
             <Text>Load Game</Text>

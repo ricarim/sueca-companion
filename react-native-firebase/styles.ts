@@ -9,5 +9,11 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 300,
   },
+  button: {
+    backgroundColor: 'blue',
+    padding: 20,
+    borderRadius: 10,
+    margin: 20,
+  },
 });
 
