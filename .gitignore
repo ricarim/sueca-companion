@@ -50,3 +50,5 @@ google-services.json
 
 # Android Profiling
 *.hprof
+
+react-native-firebase/assets/best_float32.tflite
