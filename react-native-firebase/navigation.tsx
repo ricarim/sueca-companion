@@ -1,5 +1,5 @@
 import Home from './screens/Home/Home';
-import Game from './Game';
+import Game from './screens/Game/Game';
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
