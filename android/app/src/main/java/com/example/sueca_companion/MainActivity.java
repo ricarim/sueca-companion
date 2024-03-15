@@ -1,77 +1,48 @@
-package com.example.sueca_companion;
+import org.tensorflow.lite.Interpreter;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.sun.tools.javac.util.ByteBuffer;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
+import sun.jvm.hotspot.utilities.BitMap;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity {
+    private Interpreter interpreter;
 
+    private static final String MODEL_PATH = "../../../../assets/best_float32.tflite";
+    private static final int DIM_BATCH_SIZE = 1;
+    private static final int DIM_IMG_SIZE_X = 224;
+    private static final int DIM_IMG_SIZE_Y = 224;
+    private static final int DIM_PIXEL_SIZE = 3;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getSupportActionBar().hide(); // hide the title bar
-        setContentView(R.layout.activity_main);
+    private ByteBuffer imgData = ByteBuffer.allocateDirect(4 * DIM_BATCH_SIZE * DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y * DIM_PIXEL_SIZE);
 
-        Button bNewGame = (Button) findViewById(R.id.bNewGame);
-        bNewGame.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                Log.d("BUTTONS","User tapped the new game button");
-                onButtonShowPopup(v,R.layout.popup_newgame);
+    private void convertBitmapToByteBuffer(BitMap bitmap) {
+        imgData.rewind();
+
+        bitmap.getPixels(intValues, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+        int pixel = 0;
+        for(int i = 0; i < DIM_IMG_SIZE_X; ++i){
+            for(int j=0; j < DIM_IMG_SIZE_Y; ++j){
+                final int val = intValues[pixel++];
+
+                imgData.putFloat((((val >> 16)) & 0xFF) - IMAGE_MEAN / IMAGE_STD);
+                imgData.putFloat((((val >> 8)) & 0xFF) - IMAGE_MEAN / IMAGE_STD);
+                imgData.putFloat(((val) & 0xFF) - IMAGE_MEAN / IMAGE_STD);
             }
-        });
+        }
 
-        Button bLoadGame = (Button) findViewById(R.id.bLoadGame);
-        bLoadGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("BUTTONS","User tapped the load game button");
-                onButtonShowPopup(v,R.layout.popup_loadgame);
-            }
-        });
     }
-    private void gameActivity(){
-        Intent intent = new Intent(this, GameActivity.class);
-        startActivity(intent);
-    }
-    public void onButtonShowPopup(View view,int layoutId) {
-
-        // inflate the layout of the popup window
-        LayoutInflater inflater = (LayoutInflater)
-                getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(layoutId, null);
-
-        // create the popup window
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = true; // lets taps outside the popup also dismiss it
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
-        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
-
-        // dismiss the popup window when touched
-        popupView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                popupWindow.dismiss();
-                gameActivity(); // remove this
-                return true;
-            }
-        });
-
+    public static void main(String[] args) {
+        BitMap bitmap = BitmapFactory.decodeFile("path_to_image");
+        convertBitmapToByteBuffer(bitmap);
+        try {
+            File file = new File(MODEL_PATH);
+            Interpreter interpreter = new Interpreter(file);
+            interpreter.run(input, output);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
     }
 }
+
