@@ -12,6 +12,19 @@ Sueca is a popular card game in Portugal and other Portuguese-speaking countries
 
  - Game Assistance: Once the cards are detected, the application provides useful information during the game, such as the suit and value of the cards.
 
+## Project Status
+
+This project is currently in development. Soon you will be able to download the application to your android phone.
+
+### Planned Features
+
+Some features that I would like to add in the future include:
+
+ - Tutorial page
+ - Support for different languages.
+ - Improvements in the accuracy and speed of the card detection model.
+ - Implementation of a training mode to enhance card detection.
+
 
 ## Contribution
 
