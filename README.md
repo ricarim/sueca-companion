@@ -8,9 +8,9 @@ Sueca is a popular card game in Portugal and other Portuguese-speaking countries
 
 ## Features
 
- - Card Detection: Using a trained computer vision model, the application is capable of identifying and recognizing the cards present in an image.
+ - **Card Detection:** Using a trained computer vision model, the application is capable of identifying and recognizing the cards present in an image.
 
- - Game Assistance: Once the cards are detected, the application provides useful information during the game, such as the suit and value of the cards.
+ - **Game Assistance:** Once the cards are detected, the application provides useful information during the game, such as the suit and value of the cards.
 
 ## Project Status
 
@@ -30,4 +30,3 @@ Some features that I would like to add in the future include:
 
 Contributions are welcome! If you'd like to contribute to this project, please feel free to open an [issue](https://github.com/ric-amorim/sueca-companion/issues) or submit a [pull request](https://github.com/ric-amorim/sueca-companion/pulls). Your contributions will be greatly appreciated!
 
-## License
