@@ -6,6 +6,9 @@ import { Camera, CameraType } from 'expo-camera';
 import { useAppNavigation } from '../../utils/useAppNavigation';
 //import { useTensorflowModel } from 'react-native-fast-tflite';
 import { useResizePlugin } from 'vision-camera-resize-plugin';
+import { NativeModules } from 'react-native';
+import { Alert } from 'react-native';
+
 
 export type GameProps = {
     name: string;
@@ -15,6 +18,26 @@ export type GameProps = {
 };
 
 export default function Game() {
+    const [result, setResult] = React.useState<string>('');
+
+    const { CardsTrainedModelModule } = NativeModules;
+    const input = [[1.0, 2.0, 3.0]];
+    async function prevision(input: number[][]): Promise<number[][]> {
+        try {
+            // Chamando o método predict do módulo nativo
+            const output = await CardsTrainedModelModule.predict(input);
+            console.log('Result of prevision:', output);
+            return output;
+        } catch (error) {
+            console.error('Error in prevision:', error);
+            throw error;
+        }
+    }
+
+    prevision(input).then((output) => {
+        setResult(JSON.stringify(output));
+    })
+
     const [hasPermission, requestPermission] = Camera.useCameraPermissions()
     const [type, setType] = React.useState(CameraType.back)
     const navigation = useAppNavigation();
@@ -81,7 +104,7 @@ export default function Game() {
             <Text style={styles.title}>Game</Text>
             <TouchableOpacity style={styles.button} onPress={navigation.goBack}>
             </TouchableOpacity>
-            {/* <iframe src="..." allow="microphone; camera;">*/}
+            {/* <iframe src="..." allow="microphone; camera;">
             <Camera style={styles.camera} type={type}>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
@@ -89,7 +112,9 @@ export default function Game() {
                     </TouchableOpacity>
                 </View>
             </Camera>
-            {/* </iframe>*/}
+            </iframe>*/}
+            <Text style={styles.title}>Result: {result}</Text>
+            <Text style={styles.title}>Test Model</Text>
         </View>
     );
 }
