@@ -33,7 +33,9 @@ Sueca is a popular card game in Portugal and other Portuguese-speaking countries
 
 ## Project Status
 
-This project is currently in development. Soon you will be able to download the application to your android phone.
+ - Create Dataset :white_check_mark:
+ - Train Dataset :white_check_mark:
+ - Create android app (ongoing) 
 
 ### Planned Features
 
