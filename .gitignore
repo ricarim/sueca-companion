@@ -1,4 +1,5 @@
 WebCam
+CMakeLists.txt
 CMakeCache.txt
 CMakeFiles
 cmake_install.cmake
@@ -16,6 +17,7 @@ yolov8/best.onnx
 yolov8/calibration_image_sample_data_20x128x128x3_float32.npy
 yolov8/best_saved_model
 *.avi
+react-native-firebase/*
 
 # Gradle files
 .gradle/
