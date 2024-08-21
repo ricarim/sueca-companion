@@ -1,9 +1,3 @@
-WebCam
-CMakeLists.txt
-CMakeCache.txt
-CMakeFiles
-cmake_install.cmake
-Makefile
 dataset/yolov4/*
 dataset/data/backgrounds.pck
 dataset/data/cards.pck
@@ -17,40 +11,4 @@ yolov8/best.onnx
 yolov8/calibration_image_sample_data_20x128x128x3_float32.npy
 yolov8/best_saved_model
 *.avi
-react-native-firebase/*
 
-# Gradle files
-.gradle/
-build/
-
-# Local configuration file (sdk path, etc)
-local.properties
-
-# Log/OS Files
-*.log
-
-# Android Studio generated files and folders
-captures/
-.externalNativeBuild/
-.cxx/
-*.apk
-output.json
-
-# IntelliJ
-*.iml
-.idea/
-misc.xml
-deploymentTargetDropDown.xml
-render.experimental.xml
-
-# Keystore files
-*.jks
-*.keystore
-
-# Google Services (e.g. APIs or Firebase)
-google-services.json
-
-# Android Profiling
-*.hprof
-
-react-native-firebase/assets/best_float32.tflite
