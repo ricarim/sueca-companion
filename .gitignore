@@ -12,3 +12,6 @@ yolov8/calibration_image_sample_data_20x128x128x3_float32.npy
 yolov8/best_saved_model
 *.avi
 
+app/out/*
+.class
+venv/*
