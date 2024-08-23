@@ -31,6 +31,9 @@ Sueca is a popular card game in Portugal and other Portuguese-speaking countries
 
  - **Game Assistance:** Once the cards are detected, the application provides useful information during the game, such as the suit, value of the cards and the scoreboard.
 
+ - **Play Validation:** Checks the validity of each play according to the rules of Sueca, alerting users if an illegal move is made.
+
+
 ## Project Status
 
  - Create Dataset :white_check_mark:
@@ -42,6 +45,7 @@ Sueca is a popular card game in Portugal and other Portuguese-speaking countries
 Some features that I would like to add in the future include:
 
  - Tutorial page
+ - Comprehensive logging to maintain a detailed log of all actions, moves, and system decisions for later review or debugging.
  - Improvements in the accuracy and speed of the card detection model.
  - Implementation of a training mode to enhance card detection.
 
