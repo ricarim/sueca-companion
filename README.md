@@ -1,6 +1,6 @@
 # Sueca Companion
 
-This is a mobile application project that utilizes a trained model to detect cards and assist in the Sueca game.
+This is a java program project that utilizes a trained model to detect cards and assist in the Portuguese card game, Sueca.
 
 
 <details>
@@ -27,22 +27,21 @@ Sueca is a popular card game in Portugal and other Portuguese-speaking countries
 
 ## Features
 
- - **Card Detection:** Using a trained computer vision model, the application is capable of identifying and recognizing the cards present in an image.
+ - **Card Detection:** Using a custom trained computer vision model, the application is capable of identifying and recognizing the cards present at the game.
 
- - **Game Assistance:** Once the cards are detected, the application provides useful information during the game, such as the suit and value of the cards.
+ - **Game Assistance:** Once the cards are detected, the application provides useful information during the game, such as the suit, value of the cards and the scoreboard.
 
 ## Project Status
 
  - Create Dataset :white_check_mark:
  - Train Dataset :white_check_mark:
- - Create android app (ongoing) 
+ - Create java program (ongoing) 
 
 ### Planned Features
 
 Some features that I would like to add in the future include:
 
  - Tutorial page
- - Support for different languages.
  - Improvements in the accuracy and speed of the card detection model.
  - Implementation of a training mode to enhance card detection.
 
