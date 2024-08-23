@@ -12,7 +12,7 @@ public class RunPythonScript {
         this.pythonScriptPath = "scripts/detection.py"; 
     }
 
-    public String getCardDetected(){
+    public String[] getCardDetected(){
         try {
             ProcessBuilder processBuilder = new ProcessBuilder("python3", this.pythonScriptPath);
             processBuilder.redirectErrorStream(true);
@@ -26,13 +26,16 @@ public class RunPythonScript {
                 this.cardName = line;
             }
 
-            System.out.println(this.cardName);
             int exitCode = process.waitFor();
             System.out.println("Exit Code: " + exitCode);
-            return this.cardName;
+
+            String[] output = this.cardName.split(" "); 
+            System.out.println(output[0]);
+            return output;
 
         } catch (Exception e) {
-            return e.toString();
+            String[] output = {e.toString(), null};
+            return output;
         }
     }
 }

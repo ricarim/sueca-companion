@@ -13,6 +13,7 @@ public class GameInstance{
     private Player[] players;
     private Card trump; 
     private int[] score;
+    private boolean[] cards;
 
     public RunPythonScript runPythonScript = new RunPythonScript();
 
@@ -20,13 +21,29 @@ public class GameInstance{
         this.players = players;
         this.trump = null;
         this.score = new int[2];
+        this.cards = new boolean[40];
 
     }
 
+    /*
+     * TIP: If you have 5 cards detected and one of them is the initial trump, then ignore the trump.
+     *
+     */
+
+
+    /*
+     * TODO: 
+     *      Trumps rules.
+     *      Detect multiple cards at once.
+     *
+     */
+
     public int[] match(){
         int firstPlayer = 0;
-        this.trump = new Card(runPythonScript.getCardDetected(),firstPlayer);
+        String[] cardDetected = runPythonScript.getCardDetected();
+        this.trump = new Card(cardDetected[0],firstPlayer);
         this.players[firstPlayer].addCard(trump);
+        this.cards[Integer.parseInt(cardDetected[1])] = true;
 
 
         for(int round=0; round <10; round++){
@@ -46,7 +63,20 @@ public class GameInstance{
         char suit = '\0';
 
         for(int i=1; i<5; i++){
-            Card card = new Card(runPythonScript.getCardDetected(),i-1);
+            String[] cardDetected;
+            Card card;
+
+            while(true){
+                cardDetected = runPythonScript.getCardDetected();
+                card = new Card(cardDetected[0],i-1);
+
+                if(!this.cards[Integer.parseInt(cardDetected[1])]) break;
+                System.out.println("ATTENTION: "+ card.getRank()+""+card.getSuit() + " already played!"); 
+            }
+
+            this.players[i%4].addCard(card);
+            this.cards[Integer.parseInt(cardDetected[1])] = true;
+            count += card.getCardPoints();
 
             if(bestCard == null) {
                 bestCard = card;
@@ -55,9 +85,6 @@ public class GameInstance{
             else if(card.getCardOrderRank() >= bestCard.getCardOrderRank() && card.getSuit() == suit) {
                 bestCard = card;
             }
-            if(card.equals(trump)) continue;
-            this.players[i%4].addCard(card);
-            count += card.getCardPoints();
         }
 
         //System.out.println(bestCard.getRank()+""+bestCard.getSuit() + " "+ players[bestCard.getPlayerId()].getName());

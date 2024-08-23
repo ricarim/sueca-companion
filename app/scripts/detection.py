@@ -3,6 +3,7 @@ import cv2
 import math
 
 card = ""
+cardId = ""
 model = YOLO('../yolov8/best.pt')
 cap = cv2.VideoCapture(0)
 
@@ -26,12 +27,13 @@ while True:
             cls = int(box.cls[0])
             if conf > 0.5:
                 card = class_names[cls]
+                cardId = cls
                 detected = True
 
     if detected == True:
         break
 
-print(card)
+print(card, cardId)
                 
 cap.release()
 cv2.destroyAllWindows()
